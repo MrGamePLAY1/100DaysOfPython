@@ -71,6 +71,29 @@ resources = {
 }
 
 
+def repeat_program():
+    active = True
+    while active:
+        repeat = input('Invalid. Would you like to continue? (y/n) ')
+        if repeat.lower() == 'y':
+            selection = input('What would you like? ')
+            lowered_selection = selection.lower()
+            if lowered_selection in MENU:
+                print('You have selected: ', lowered_selection)
+                print('\n That will be €', MENU[str(lowered_selection)]['cost'], ' please. \n')
+                user_coin_input = float(input('Please insert coins: '))
+                dispense_coffee(lowered_selection)
+                change = user_coin_input - MENU[lowered_selection]['cost']
+                if user_coin_input >= MENU[lowered_selection]['cost']:
+                    print('\n','Here is your change €', change)
+                else:
+                    print('Not enough money inserted. Please insert more coins.')
+        else:
+            active = False
+            print('Thank you for using the Coffee Machine.')
+            exit()
+
+
 def dispense_coffee(userSelection):
     if userSelection.lower() == 'black coffee' or userSelection.lower() == 'black':
         print('\n \n Dispensing Black Coffee \n')
@@ -80,9 +103,6 @@ def dispense_coffee(userSelection):
 
         print('Using 1.33g of coffee')
         resources['coffee'] -= 1.33
-
-        print('\n Cost: €1.50')
-        print('Please insert coins')
 
     elif userSelection.lower() == 'latte':
         print('\n \n Dispensing Latte \n')
@@ -96,9 +116,6 @@ def dispense_coffee(userSelection):
         print('Using 24g of coffee')
         resources['coffee'] -= 24
 
-        print('\n Cost: €2.50')
-        print('Please insert coins')
-
     elif userSelection.lower() == 'cappuccino':
         print('\n \n Dispensing Cappuccino \n')
         print('Using 250ml of water')
@@ -110,10 +127,6 @@ def dispense_coffee(userSelection):
         print('Using 24g of coffee')
         resources['coffee'] -= 24
 
-        print('\n Cost: €3.00')
-        print('Please insert coins')
-
-
     elif userSelection.lower() == 'flat white':
         print('\n \n Dispensing Flat White \n')
         print('Using 200ml of water')
@@ -124,9 +137,6 @@ def dispense_coffee(userSelection):
 
         print('Using 18g of coffee')
         resources['coffee'] -= 18
-
-        print('\n Cost: €1.50')
-        print('Please insert coins')
 
     elif userSelection.lower() == 'irish' or userSelection.lower() == 'irish coffee':
         print('\n \n Dispensing Irish Coffee \n')
@@ -148,9 +158,6 @@ def dispense_coffee(userSelection):
         print('Using 50ml of whiskey')
         resources['whiskey'] -= 50
 
-        print('\n Cost: €4.50')
-        print('Please insert coins')
-
     elif userSelection.lower() == 'mocha':
         print('\n \n Dispensing Mocha \n')
         print('Using 250ml of milk')
@@ -161,6 +168,3 @@ def dispense_coffee(userSelection):
 
         print('Using 1g of chocolate')
         resources['chocolate'] -= 1
-
-        print('\n Cost: €2.00')
-        print('Please insert coins')
