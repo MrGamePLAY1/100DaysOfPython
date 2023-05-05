@@ -71,6 +71,24 @@ resources = {
 }
 
 
+def user_selection(user_input):
+    if user_input.lower() in MENU:
+        print('You have selected: ', user_input)
+        print('\n That will be €', MENU[user_input]['cost'], 'please. \n')
+
+        # Taking coins
+        coin_input = float(input('Please insert coins: '))
+
+        # Checking inserted coins
+        if coin_input >= MENU[user_input]['cost']:
+            dispense_coffee(user_input)
+
+            # Change
+            change = coin_input - MENU[user_input]['cost']
+            print('\n Here is your change: €', change)
+        else:
+            print('Not enough inserted. Transaction cancelled')
+
 def repeat_program():
     active = True
     while active:
@@ -78,28 +96,12 @@ def repeat_program():
 
         if repeat.lower() == 'y':
             selection = input('What would you like? ')
-            lowered_selection = selection.lower()
-            if lowered_selection in MENU:
-                print('You have selected:', lowered_selection)
-                print('\nThat will be €', MENU[lowered_selection]['cost'], 'please.\n')
-                user_coin_input = float(input('Please insert coins: '))
-                change = user_coin_input - MENU[lowered_selection]['cost']
 
-                if user_coin_input >= MENU[lowered_selection]['cost']:
-                    dispense_coffee(lowered_selection)
-                    print('\nHere is your change €', change)
-                else:
-                    print('Not enough money inserted. Please insert more coins.')
+            # This function calculates user input, change and dispensing
+            user_selection(selection)
 
         elif repeat.lower() == 'report':
-            print('\nWater:', resources['water'], 'ml',
-                  '\nMilk:', resources['milk'], 'ml',
-                  '\nCoffee:', resources['coffee'], 'g',
-                  '\nSugar:', resources['sugar'], 'g',
-                  '\nCream:', resources['cream'], 'ml',
-                  '\nWhiskey:', resources['whiskey'], 'ml',
-                  '\nChocolate:', resources['chocolate'], 'g'
-                  )
+            print_report()
 
         elif repeat.lower() == 'n':
             active = False
@@ -108,6 +110,17 @@ def repeat_program():
 
         else:
             print('Invalid input. Please try again.')
+
+
+def print_report():
+    print('\nWater:', resources['water'], 'ml',
+          '\nMilk:', resources['milk'], 'ml',
+          '\nCoffee:', resources['coffee'], 'g',
+          '\nSugar:', resources['sugar'], 'g',
+          '\nCream:', resources['cream'], 'ml',
+          '\nWhiskey:', resources['whiskey'], 'ml',
+          '\nChocolate:', resources['chocolate'], 'g'
+          )
 
 
 def dispense_coffee(userSelection):
