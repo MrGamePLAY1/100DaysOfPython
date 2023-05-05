@@ -74,24 +74,40 @@ resources = {
 def repeat_program():
     active = True
     while active:
-        repeat = input('Invalid. Would you like to continue? (y/n) ')
+        repeat = input('Would you like to continue? (y/n) ')
+
         if repeat.lower() == 'y':
             selection = input('What would you like? ')
             lowered_selection = selection.lower()
             if lowered_selection in MENU:
-                print('You have selected: ', lowered_selection)
-                print('\n That will be €', MENU[str(lowered_selection)]['cost'], ' please. \n')
+                print('You have selected:', lowered_selection)
+                print('\nThat will be €', MENU[lowered_selection]['cost'], 'please.\n')
                 user_coin_input = float(input('Please insert coins: '))
-                dispense_coffee(lowered_selection)
                 change = user_coin_input - MENU[lowered_selection]['cost']
+
                 if user_coin_input >= MENU[lowered_selection]['cost']:
-                    print('\n','Here is your change €', change)
+                    dispense_coffee(lowered_selection)
+                    print('\nHere is your change €', change)
                 else:
                     print('Not enough money inserted. Please insert more coins.')
-        else:
+
+        elif repeat.lower() == 'report':
+            print('\nWater:', resources['water'], 'ml',
+                  '\nMilk:', resources['milk'], 'ml',
+                  '\nCoffee:', resources['coffee'], 'g',
+                  '\nSugar:', resources['sugar'], 'g',
+                  '\nCream:', resources['cream'], 'ml',
+                  '\nWhiskey:', resources['whiskey'], 'ml',
+                  '\nChocolate:', resources['chocolate'], 'g'
+                  )
+
+        elif repeat.lower() == 'n':
             active = False
             print('Thank you for using the Coffee Machine.')
             exit()
+
+        else:
+            print('Invalid input. Please try again.')
 
 
 def dispense_coffee(userSelection):

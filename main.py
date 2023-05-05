@@ -20,7 +20,7 @@ elif lowered_user_input == 'report':
           'Coffee: ', resources['coffee'], 'g','\n'
           'Sugar: ', resources['sugar'], 'g','\n'
           'Cream: ', resources['cream'], 'ml','\n'
-          'Whiskey: ', resources['water'], 'ml','\n'
+          'Whiskey: ', resources['whiskey'], 'ml','\n'
           'Chocolate: ', resources['chocolate'], 'g','\n')
 
 # TODO: 2. Check if there are enough resources to be used in making the drink
