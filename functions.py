@@ -68,26 +68,41 @@ resources = {
     "cream": 500,
     "whiskey": 500,
     "chocolate": 500,
+    "bank balance": 0,
 }
 
 
+def addFundstoBank(coin, user_input):
+    balance = 0
+
+    # add coin input to balance
+    balance += MENU[user_input]['cost']
+    # Adding values to the bank balance
+    resources['bank balance'] += balance
+
+    balance_value = resources['bank balance']
+
+    print('Bank Balance: €', balance_value)
+
+
 def user_selection(user_input):
-    if user_input.lower() in MENU:
-        print('You have selected: ', user_input)
-        print('\n That will be €', MENU[user_input]['cost'], 'please. \n')
+    print('You have selected: ', user_input)
+    print('\n That will be €', MENU[user_input]['cost'], 'please. \n')
 
-        # Taking coins
-        coin_input = float(input('Please insert coins: '))
+    # Taking coins
+    coin_input = float(input('Please insert coins: '))
 
-        # Checking inserted coins
-        if coin_input >= MENU[user_input]['cost']:
-            dispense_coffee(user_input)
+    # Checking inserted coins
+    if coin_input >= MENU[user_input]['cost']:
+        dispense_coffee(user_input)
+        addFundstoBank(coin_input, user_input)
 
-            # Change
-            change = coin_input - MENU[user_input]['cost']
-            print('\n Here is your change: €', change)
-        else:
-            print('Not enough inserted. Transaction cancelled')
+        # Change
+        change = coin_input - MENU[user_input]['cost']
+        print('\n Here is your change: €', change)
+    else:
+        print('Not enough inserted. Transaction cancelled')
+
 
 def repeat_program():
     active = True
@@ -97,16 +112,21 @@ def repeat_program():
         if repeat.lower() == 'y':
             selection = input('What would you like? ')
 
+            if selection == 'report':
+                print_report()
+
+            elif selection.lower() in MENU:
+                user_selection(selection)
+                dispense_coffee(selection)
+
+            elif selection.lower() == 'n':
+                active = False
+                print('Thank you for using the Coffee Machine.')
+                exit()
+
             # This function calculates user input, change and dispensing
-            user_selection(selection)
+            #
 
-        elif repeat.lower() == 'report':
-            print_report()
-
-        elif repeat.lower() == 'n':
-            active = False
-            print('Thank you for using the Coffee Machine.')
-            exit()
 
         else:
             print('Invalid input. Please try again.')
@@ -119,81 +139,117 @@ def print_report():
           '\nSugar:', resources['sugar'], 'g',
           '\nCream:', resources['cream'], 'ml',
           '\nWhiskey:', resources['whiskey'], 'ml',
-          '\nChocolate:', resources['chocolate'], 'g'
+          '\nChocolate:', resources['chocolate'], 'g', '\n'
+          
+          'Bank Balance: €', resources['bank balance'], '\n'
           )
 
 
 def dispense_coffee(userSelection):
     if userSelection.lower() == 'black coffee' or userSelection.lower() == 'black':
-        print('\n \n Dispensing Black Coffee \n')
+        # if resources are 0 or less, print out of stock
+        if resources['water'] >= 0 or resources['coffee'] >= 0:
+            print('\n \n Dispensing Black Coffee \n')
 
-        print('Using 237ml of water')
-        resources['water'] -= 237
+            print('Using 237ml of water')
+            resources['water'] -= 237
 
-        print('Using 1.33g of coffee')
-        resources['coffee'] -= 1.33
+            print('Using 1.33g of coffee')
+            resources['coffee'] -= 1.33
+
+        elif resources['water'] <= 0 or resources['coffee'] <= 0:
+            print('Out of stock')
 
     elif userSelection.lower() == 'latte':
-        print('\n \n Dispensing Latte \n')
+        # if resources are 0 or less, print out of stock
+        if resources['water'] >= 0 or resources['milk'] >= 0 or resources['coffee'] >= 0:
+            print('\n \n Dispensing Latte \n')
 
-        print('Using 200ml of water')
-        resources['water'] -= 200
+            print('Using 200ml of water')
+            resources['water'] -= 200
 
-        print('Using 150ml of milk')
-        resources['milk'] -= 150
+            print('Using 150ml of milk')
+            resources['milk'] -= 150
 
-        print('Using 24g of coffee')
-        resources['coffee'] -= 24
+            print('Using 24g of coffee')
+            resources['coffee'] -= 24
+
+        elif resources['water'] <= 0 or resources['milk'] <= 0 or resources['coffee'] <= 0:
+            print('Out of stock')
 
     elif userSelection.lower() == 'cappuccino':
-        print('\n \n Dispensing Cappuccino \n')
-        print('Using 250ml of water')
-        resources['water'] -= 250
+        # if resources are 0 or less, print out of stock
+        if resources['water'] >= 0 or resources['milk'] >= 0 or resources['coffee'] >= 0:
+            print('\n \n Dispensing Cappuccino \n')
+            print('Using 250ml of water')
+            resources['water'] -= 250
 
-        print('Using 100ml of milk')
-        resources['milk'] -= 100
+            print('Using 100ml of milk')
+            resources['milk'] -= 100
 
-        print('Using 24g of coffee')
-        resources['coffee'] -= 24
+            print('Using 24g of coffee')
+            resources['coffee'] -= 24
+
+        elif resources['water'] <= 0 or resources['milk'] <= 0 or resources['coffee'] <= 0:
+            print('Out of stock')
 
     elif userSelection.lower() == 'flat white':
-        print('\n \n Dispensing Flat White \n')
-        print('Using 200ml of water')
-        resources['water'] -= 200
+        # if resources are 0 or less, print out of stock
+        if resources['water'] >= 0 or resources['milk'] >= 0 or resources['coffee'] >= 0:
+            print('\n \n Dispensing Flat White \n')
+            print('Using 200ml of water')
+            resources['water'] -= 200
 
-        print('Using 100ml of milk')
-        resources['milk'] -= 100
+            print('Using 100ml of milk')
+            resources['milk'] -= 100
 
-        print('Using 18g of coffee')
-        resources['coffee'] -= 18
+            print('Using 18g of coffee')
+            resources['coffee'] -= 18
+
+        elif resources['water'] <= 0 or resources['milk'] <= 0 or resources['coffee'] <= 0:
+            print('Out of stock')
 
     elif userSelection.lower() == 'irish' or userSelection.lower() == 'irish coffee':
-        print('\n \n Dispensing Irish Coffee \n')
-        print('Using 200ml of water')
-        resources['water'] -= 200
+        # if resources are 0 or less, print out of stock
+        if resources['water'] >= 0 or resources['milk'] >= 0 or resources['coffee'] >= 0 or resources[
+            'sugar'] >= 0 or resources['cream'] >= 0 or resources['whiskey'] >= 0:
+            print('\n \n Dispensing Irish Coffee \n')
+            print('Using 200ml of water')
+            resources['water'] -= 200
 
-        print('Using 100ml of milk')
-        resources['milk'] -= 100
+            print('Using 100ml of milk')
+            resources['milk'] -= 100
 
-        print('Using 150g of coffee')
-        resources['coffee'] -= 150
+            print('Using 150g of coffee')
+            resources['coffee'] -= 150
 
-        print('Using 1g of sugar')
-        resources['sugar'] -= 1
+            print('Using 1g of sugar')
+            resources['sugar'] -= 1
 
-        print('Using 2g of cream')
-        resources['cream'] -= 2
+            print('Using 2g of cream')
+            resources['cream'] -= 2
 
-        print('Using 50ml of whiskey')
-        resources['whiskey'] -= 50
+            print('Using 50ml of whiskey')
+            resources['whiskey'] -= 50
+
+        elif resources['water'] <= 0 or resources['milk'] <= 0 or resources['coffee'] <= 0 or resources[
+            'sugar'] <= 0 or resources['cream'] <= 0 or resources['whiskey'] <= 0:
+            print('Out of stock')
 
     elif userSelection.lower() == 'mocha':
-        print('\n \n Dispensing Mocha \n')
-        print('Using 250ml of milk')
-        resources['milk'] -= 250
+        # if resources are 0 or less, print out of stock
+        if resources['water'] >= 0 or resources['milk'] >= 0 or resources['coffee'] >= 0 or resources[
+            'chocolate'] >= 0:
+            print('\n \n Dispensing Mocha \n')
+            print('Using 250ml of milk')
+            resources['milk'] -= 250
 
-        print('Using 18g of coffee')
-        resources['coffee'] -= 18
+            print('Using 18g of coffee')
+            resources['coffee'] -= 18
 
-        print('Using 1g of chocolate')
-        resources['chocolate'] -= 1
+            print('Using 1g of chocolate')
+            resources['chocolate'] -= 1
+
+        elif resources['water'] <= 0 or resources['milk'] <= 0 or resources['coffee'] <= 0 or resources[
+            'chocolate'] <= 0:
+            print('Out of stock')
