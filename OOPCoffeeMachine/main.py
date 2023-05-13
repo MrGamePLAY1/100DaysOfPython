@@ -4,9 +4,6 @@ from menu import Menu, MenuItem
 from coffee_maker import CoffeeMaker
 from money_machine import MoneyMachine
 
-# TODO 1: Prompt the user 'What would you like?'
-user_input = input("What would you like? (espresso/latte/cappuccino): ").lower()
-
 # TODO 2: Check the users input to check what to do next
 # ------- All Objects -------
 coffee = CoffeeMaker()  # Creating a CoffeeMaker Object
@@ -14,26 +11,20 @@ menu = Menu()  # Create a Menu Object
 money = MoneyMachine()  # Creating a MoneyMachine Object
 
 switch = True
-items = menu.get_items()  # Making a list of all the items in the menu
-
+# Making a list of all the items in the menu
 while switch:
-    if user_input == 'report'.lower():
-        money_report = money.report()  # Creating a report of the money
-        switch = False
+    user_input = input("What would you like? (espresso/latte/cappuccino): ").lower()
+    items = menu.get_items()
 
-    elif user_input == 'off'.lower():
-        switch = False
+    if user_input in items:
+        drinks = menu.find_drink(user_input)  # Finding the ingredients for the selected item
+        cost_forSelected = drinks.cost  # Finding the cost for the selected item
 
-
-    elif user_input in items:
-        ingredients_forSelected = menu.find_drink(user_input)  # Finding the ingredients for the selected item
-        cost_forSelected = ingredients_forSelected.cost  # Finding the cost for the selected item
-        # report = coffee.report()  # Creating a report of the resources
         # Printing what the user selected
         print(f"You selected {user_input}.")
 
         # Printing the ingredients needed
-        print("Ingredients needed: ", ingredients_forSelected.ingredients)
+        print("Ingredients needed: ", drinks.ingredients)
 
         # Printing the cost for selected
         print("Cost €: ", cost_forSelected)
@@ -46,7 +37,7 @@ while switch:
         # Check transaction successful
         if money_received >= cost_forSelected:
             # Dispensing Process
-            coffee.make_coffee(ingredients_forSelected)
+            coffee.make_coffee(drinks)
             print('Successful transaction')
             switch = False
 
@@ -54,3 +45,14 @@ while switch:
             print('Transaction failed')
             switch = False
 
+    if user_input == 'report'.lower():
+        coffee.report()  # Creating a report of the resources
+        money.report()  # Creating a report of the money
+        # switch = False
+
+    elif user_input == 'off'.lower():
+        switch = False
+
+    else:
+        offer_again = menu.find_drink(user_input)
+        print(offer_again)
