@@ -23,27 +23,37 @@ while switch:
         # Printing what the user selected
         print(f"You selected {user_input}.")
 
-        # Printing the ingredients needed
-        print("Ingredients needed: ", drinks.ingredients)
+        # Check if we even have the ingredients
+        if coffee.is_resource_sufficient(drinks):
+            print('We have enough to make this')
 
-        # Printing the cost for selected
-        print("Cost €: ", cost_forSelected)
+            # Subtract the ingredients from the resources
+            coffee.resources['water'] -= drinks.ingredients['water']
+            coffee.resources['milk'] -= drinks.ingredients['milk']
+            coffee.resources['coffee'] -= drinks.ingredients['coffee']
 
-        # Make payment
-        money = money_machine.MoneyMachine()
-        money_received = money.process_coins()
-        print("€", money_received)
 
-        # Check transaction successful
-        if money_received >= cost_forSelected:
-            # Dispensing Process
-            coffee.make_coffee(drinks)
-            print('Successful transaction')
-            switch = False
+            # Printing the ingredients needed
+            print("Ingredients needed: ", drinks.ingredients)
 
-        else:
-            print('Transaction failed')
-            switch = False
+            # Printing the cost for selected
+            print("Cost €: ", cost_forSelected)
+
+            # Make payment
+            money = money_machine.MoneyMachine()
+            money_received = money.process_coins()
+            print("€", money_received)
+
+            # Check transaction successful
+            if money_received >= cost_forSelected:
+                # Dispensing Process
+                coffee.make_coffee(drinks)
+                print('Successful transaction')
+                switch = False
+
+            else:
+                print('Transaction failed')
+                switch = False
 
     if user_input == 'report'.lower():
         coffee.report()  # Creating a report of the resources
@@ -54,5 +64,6 @@ while switch:
         switch = False
 
     else:
-        offer_again = menu.find_drink(user_input)
-        print(offer_again)
+        switch = True
+        # offer_again = menu.find_drink(user_input)
+        # print(offer_again) # FIX ME
