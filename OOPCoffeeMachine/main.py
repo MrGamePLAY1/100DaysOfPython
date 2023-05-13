@@ -27,14 +27,15 @@ while switch:
         if coffee.is_resource_sufficient(drinks):
             print('We have enough to make this')
 
-            # Subtract the ingredients from the resources
+            # Printing the ingredients needed
+            print("Ingredients needed: ", drinks.ingredients)
+
+            # TODO: Make a check for if we go negative and if stop prompt user saying not enough resources
+            # TODO: Subtract the ingredients from the resources
+
             coffee.resources['water'] -= drinks.ingredients['water']
             coffee.resources['milk'] -= drinks.ingredients['milk']
             coffee.resources['coffee'] -= drinks.ingredients['coffee']
-
-
-            # Printing the ingredients needed
-            print("Ingredients needed: ", drinks.ingredients)
 
             # Printing the cost for selected
             print("Cost €: ", cost_forSelected)
@@ -43,6 +44,8 @@ while switch:
             money = money_machine.MoneyMachine()
             money_received = money.process_coins()
             print("€", money_received)
+
+            # TODO:  Add the price of the drink to the bank adn return change
 
             # Check transaction successful
             if money_received >= cost_forSelected:
