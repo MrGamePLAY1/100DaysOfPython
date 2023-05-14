@@ -25,6 +25,7 @@ while switch:
 
     else:
         drink = menu.find_drink(selection)
+        # If coffee machine is resource sufficient and money is sufficient make the coffee
         if coffee.is_resource_sufficient(drink) and money.make_payment(drink.cost):
             coffee.make_coffee(drink)
 
