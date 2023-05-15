@@ -17,4 +17,10 @@ for question in question_data:
     question_bank.append(new_question)
 
 quiz = QuizBrain(question_bank)
-quiz.next_question()
+
+# Creating a while loop to loop through all questions once answer is recieved
+while True:
+    quiz.next_question()
+    if quiz.still_has_questions() is False:
+        print('You have completed the quiz.')
+        break
