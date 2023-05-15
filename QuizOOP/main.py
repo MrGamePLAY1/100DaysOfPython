@@ -1,16 +1,17 @@
 from question_model import Quiz
 from data import question_data
+from data import computer_data
 from quiz_brain import QuizBrain
 
 # Creating the question bank from the data file
 question_bank = []
 
 # Loop through all the questions in the data file
-for question in question_data:
+for question in computer_data:
     # Variable to hold the question and answer
-    text = question['text']
+    text = question['question']
     # print(text)
-    answer = question['answer']
+    answer = question['correct_answer']
 
     # Creating my new question object
     new_question = Quiz(text, answer)
