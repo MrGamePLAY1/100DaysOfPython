@@ -21,7 +21,7 @@ class QuizBrain:
             self.score += 1
             print(f'Correct! {self.score}/12')
         else:
-            print('Incorrect')
+            print('Incorrect \n')
         print(f'The correct answer was {correct_answer}. ')
 
 
@@ -30,7 +30,7 @@ class QuizBrain:
         if self.question_number < len(self.question_list):
             return True
         else:
-            print(f'Final score: {self.score}/12')
+            print(f'\n Final score: {self.score}/{self.question_number}')
             return False
 
 
