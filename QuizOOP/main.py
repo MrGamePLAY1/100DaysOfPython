@@ -13,7 +13,7 @@ for question in question_data:
     answer = question['answer']
 
     # Creating my new question object
-    new_question = question(text, answer)
+    new_question = Quiz(text, answer)
     question_bank.append(new_question)
 
 quiz = QuizBrain(question_bank)
