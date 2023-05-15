@@ -22,7 +22,7 @@ class QuizBrain:
             print(f'Correct! {self.score}/12')
         else:
             print('Incorrect \n')
-        print(f'The correct answer was {correct_answer}. ')
+        print(f'The correct answer was {correct_answer}.\n ')
 
 
     def still_has_questions(self):
