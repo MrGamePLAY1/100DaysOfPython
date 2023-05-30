@@ -11,10 +11,10 @@ y_pos = [-180, -140, -100, -60, -20, 20]
 colours = ['red', 'blue', 'green', 'purple', 'yellow', 'orange']
 
 # Checking if race is on
-race_on = False
+is_race_on = False
 # If the user inputs value in textbox then race is on
 if user_choice:
-    race_on = True
+    is_race_on = True
 
     for i in range(6):
 
@@ -26,10 +26,19 @@ if user_choice:
         new_turtle.color(colours[i])
         all_turtles.append(new_turtle)
 
-while race_on:
+while is_race_on:
     for turtle in all_turtles:
+        if turtle.xcor() > 230:
+            is_race_on = False
+            winning_colour = turtle.pencolor()
+            if winning_colour == user_choice:
+                print(f"You won! The {turtle.pencolor()} turtle is the winner!")
+            else:
+                print(f"You lost! The {turtle.pencolor()} turtle is the winner!")
+
         rand_dist = random.randint(0, 10)
         turtle.forward(rand_dist)
+
 
 
 
