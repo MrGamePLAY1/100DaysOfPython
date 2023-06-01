@@ -10,6 +10,13 @@ START_POS = [(0, 0), (-20, 0), (-40, 0)]
 snake_body = []
 MOVE = 20
 
+# Directions
+UP = 90
+DOWN = 270
+LEFT = 180
+RIGHT = 0
+
+
 class Snake:
     def __init__(self):
         self.snake_body = []
@@ -33,18 +40,22 @@ class Snake:
         self.snake_body[0].forward(MOVE)
 
     def up(self):
-        self.snake_body[0].setheading(90)
-        self.move_snake()
+        if self.snake_body[0].heading() != DOWN:
+            self.snake_body[0].setheading(UP)
+            self.move_snake()
 
     def left(self):
-        self.snake_body[0].setheading(180)
-        self.move_snake()
+        if self.snake_body[0].heading() != RIGHT:
+            self.snake_body[0].setheading(LEFT)
+            self.move_snake()
 
     def right(self):
-        self.snake_body[0].setheading(0)
-        self.move_snake()
+        if self.snake_body[0].heading() != LEFT:
+            self.snake_body[0].setheading(RIGHT)
+            self.move_snake()
 
     def down(self):
-        self.snake_body[0].setheading(270)
-        self.move_snake()
+        if self.snake_body[0].heading() != UP:
+            self.snake_body[0].setheading(DOWN)
+            self.move_snake()
 
