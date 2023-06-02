@@ -21,6 +21,7 @@ class Snake:
     def __init__(self):
         self.snake_body = []
         self.create_snake()
+        self.head = self.snake_body[0]
 
     def create_snake(self):
         for start_pos in START_POS:

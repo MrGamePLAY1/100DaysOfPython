@@ -27,11 +27,22 @@ screen.bgcolor('black')
 screen.title('Snake Game')
 screen.tracer(0)
 
+# Score
+score = 0
+
 game_on = True
 while game_on:
     screen.update()
     time.sleep(0.1)
     new_snake.move_snake()
+
+    # Food Collision
+    if new_snake.head.distance(food) < 15:
+        food.refresh()
+        #new_snake.extend() # Function for the snake to grow
+        score += 1
+        print(f"Score: {score}")
+
 
 # CLICK TO EXIT
 screen.exitonclick()
