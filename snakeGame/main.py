@@ -3,11 +3,13 @@ import time
 from snake import Snake
 from food import Food
 from scoreboard import Scoreboard
+from gameOver import GameOver
 
 screen = Screen()
 new_snake = Snake()  # Snake object
 food = Food()  # Food object
 score = Scoreboard()  # Scoreboard object
+gameOver = GameOver()  # GameOver object
 
 screen.listen()
 
@@ -40,6 +42,13 @@ while game_on:
         food.refresh()
         #new_snake.extend() # Function for the snake to grow
         score.increase_score()
+
+    # Wall Collision
+    if new_snake.head.xcor() > 280 or new_snake.head.xcor() < -280 or new_snake.head.ycor() < -280:
+        game_on = False
+        score.reset()
+        gameOver.game_over()
+        # new_snake.reset()
 
 
 # CLICK TO EXIT
