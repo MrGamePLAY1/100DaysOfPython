@@ -11,10 +11,11 @@ screen.setup(SCREEN_WIDTH, SCREEN_HEIGHT)
 screen.bgcolor("black")
 screen.title("Pong!")
 
-paddle = Paddle()
+l_paddle = Paddle((-350, 0))
+r_paddle = Paddle((350, 0))
 
-screen.onkey(paddle.up, "Up")
-screen.onkey(paddle.down, "Down")
+screen.onkey(l_paddle.up, "Up")
+screen.onkey(l_paddle.down, "Down")
 
 
 # Listen for keyboard input
