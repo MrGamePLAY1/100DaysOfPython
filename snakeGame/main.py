@@ -49,6 +49,14 @@ while game_on:
         score.game_over()
         # new_snake.reset()
 
+    # Collision with snake body
+    for bod in new_snake.snake_body:
+        if bod == new_snake.head:
+            pass
+        elif new_snake.head.distance(bod) < 10:
+            game_on = False
+            score.game_over()
+
 
 # CLICK TO EXIT
 screen.exitonclick()
