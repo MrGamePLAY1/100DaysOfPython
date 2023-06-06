@@ -50,10 +50,8 @@ while game_on:
         # new_snake.reset()
 
     # Collision with snake body
-    for bod in new_snake.snake_body:
-        if bod == new_snake.head:
-            pass
-        elif new_snake.head.distance(bod) < 10:
+    for bod in new_snake.snake_body[1:]:
+        if new_snake.head.distance(bod) < 10:
             game_on = False
             score.game_over()
 
