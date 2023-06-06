@@ -17,6 +17,8 @@ r_paddle = Paddle((350, 0))
 screen.onkey(l_paddle.up, "Up")
 screen.onkey(l_paddle.down, "Down")
 
+screen.onkey(r_paddle.up, "w")
+screen.onkey(r_paddle.down, "s")
 
 # Listen for keyboard input
 screen.listen()

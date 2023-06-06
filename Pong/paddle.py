@@ -1,4 +1,4 @@
-from turtle import Turtle
+from turtle import Turtle, Screen
 
 # Paddle
 PADDLE_WIDTH = 5
