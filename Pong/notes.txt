@@ -1,0 +1,30 @@
+0. Window Size:
+        Size: 600 x 800
+        Background: Black
+
+
+1. Pong Ball:
+        Size: 10 x 10
+        Shape: Square
+        Behaviour: Forward movement
+                   Can bounce on the bottom and top roof
+                   Angle of attack is relational
+                   Can go past the player, when it does +1 score
+
+2. Player:
+    Size: 5 x 20
+    Shape: rectangle
+    Behaviour: Can go up and down
+               Can hit the pong ball
+
+3. Scoreboard:
+        Size: 20px
+        Font: Roboto Nums
+        Colour: White
+
+4. Barrier
+        Size: Top to bottom
+        Colour: White
+        Behaviour: Middle, dotted line whole way down
+                   Does not interact with ball
+                   Used as a way to measure where ball is (left, right scores)
