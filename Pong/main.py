@@ -32,11 +32,15 @@ screen.onkey(r_paddle.down, "s")
 # Listen for keyboard input
 screen.listen()
 
+
 while game_on:
-    # time.sleep(0.3)
+    time.sleep(0.1)
     screen.update()
     ball.move()
-    ball.wall_collision()
+
+    if ball.ycor() > 280 or ball.ycor() < -280:
+        ball.wall_hit()
+
 
 
 # Score
