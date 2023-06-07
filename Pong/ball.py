@@ -14,13 +14,13 @@ class Ball(Turtle):
         self.penup()
 
     def move(self):
-        # move_y = self.ycor() + 7.5
-        move_x = self.xcor() + 10
-        move_y = self.ycor() + 18
+        # move_y = self.ycor() +7.5
+        move_y = self.ycor() - 18
+        move_x = self.xcor() - 10
         self.goto(move_x, move_y)
 
     def wall_collision(self):
-        if self.ycor() >= SCREEN_HEIGHT:
+        if self.ycor() >= SCREEN_HEIGHT or self.ycor() <= SCREEN_BOTTOM:
             # get the current x and y cordinate
             current_x = self.xcor()
             current_y = self.ycor()
