@@ -57,9 +57,11 @@ while game_on:
         scoreboard.l_score += 1
         scoreboard.clear()
         scoreboard.update_scoreboard()
-        game_on = False
-        ball.reset_position()
         game_on = True
+        ball.reset_position()
+        if scoreboard.l_score == 5:
+            scoreboard.game_over()
+            game_on = False
 
 
 
@@ -67,9 +69,12 @@ while game_on:
         scoreboard.r_score += 1
         scoreboard.clear()
         scoreboard.update_scoreboard()
-        game_on = False
-        ball.reset_position()
         game_on = True
+        ball.reset_position()
+        if scoreboard.r_score == 5:
+            scoreboard.game_over()
+            game_on = False
+
 
 
 
