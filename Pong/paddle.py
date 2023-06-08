@@ -12,7 +12,6 @@ DOWN = 270
 class Paddle(Turtle):
     def __init__(self, pos):
         super().__init__()
-        self.score = 0
         self.shape("square")
         self.color("white")
         self.shapesize(PADDLE_WIDTH, PADDLE_HEIGHT)

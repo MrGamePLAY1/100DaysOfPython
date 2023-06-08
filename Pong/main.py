@@ -54,13 +54,23 @@ while game_on:
     # Ball beyond bounds
     if ball.xcor() > 350:
         # Score for left size increase by 1
-        l_paddle.score += 1
-        # ball.reset_position()
+        scoreboard.l_score += 1
+        scoreboard.clear()
+        scoreboard.update_scoreboard()
+        game_on = False
+        ball.reset_position()
+        game_on = True
 
-    if ball.xcor() < -350:
-        # Score for right size increase by 1
-        r_paddle.score += 1
-        # ball.reset_position()
+
+
+    if ball.xcor() < -360:
+        scoreboard.r_score += 1
+        scoreboard.clear()
+        scoreboard.update_scoreboard()
+        game_on = False
+        ball.reset_position()
+        game_on = True
+
 
 
 
