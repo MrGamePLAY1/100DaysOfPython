@@ -34,17 +34,17 @@ screen.listen()
 
 
 while game_on:
-    time.sleep(0.1)
+    time.sleep(0.01)
     screen.update()
     ball.move()
 
     if ball.ycor() > 280 or ball.ycor() < -280:
-        ball.wall_hit()
+        ball.wall_hit_y()
 
-
-
-# Score
-
+    # Collision with paddle (right)
+    if ball.distance(r_paddle) < 50 and ball.xcor() > 320 or \
+            ball.distance(l_paddle) < 50 and ball.xcor() < -320:
+        ball.paddle_hit_x()
 
 
 
