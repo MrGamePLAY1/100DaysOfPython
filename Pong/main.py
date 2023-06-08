@@ -1,6 +1,7 @@
 from turtle import Screen
 from paddle import Paddle
 from ball import Ball
+from scoreboard import Scoreboard
 import time
 
 # Game On
@@ -15,6 +16,9 @@ screen = Screen()
 screen.setup(SCREEN_WIDTH, SCREEN_HEIGHT)
 screen.bgcolor("black")
 screen.title("Pong!")
+
+# Scoreboard
+scoreboard = Scoreboard()
 
 # Ball
 ball = Ball()
@@ -47,6 +51,16 @@ while game_on:
         ball.paddle_hit_x()
 
 
+    # Ball beyond bounds
+    if ball.xcor() > 350:
+        # Score for left size increase by 1
+        l_paddle.score += 1
+        # ball.reset_position()
+
+    if ball.xcor() < -350:
+        # Score for right size increase by 1
+        r_paddle.score += 1
+        # ball.reset_position()
 
 
 
