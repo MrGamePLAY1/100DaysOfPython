@@ -13,15 +13,15 @@ screen.tracer(0)
 # Player creation
 player = Player()
 
+# Scoreboard creation
+scoreboard = Scoreboard()
+
 # Car creation
 cars = []
 
 for _ in range(10):
     car = CarManager()
     cars.append(car)
-
-# Scoreboard creation
-scoreboard = Scoreboard()
 
 # Controls
 screen.onkey(player.move_up, "Up")
@@ -32,8 +32,9 @@ screen.onkey(player.move_right, "Right")
 game_is_on = True
 while game_is_on:
     for car in cars:
-        car.move()
-    time.sleep(0.1)
+        car.move() # move all cars
+        time.sleep(0.1)
+
     screen.update()
 
 screen.exitonclick()
