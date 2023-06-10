@@ -29,6 +29,7 @@ def draw_spirograph(degree):
 def million_euro_painting():
     pass
 
+
 # Draw shape
 def draw_shape(num_of_sides):
     angle = 360 / num_of_sides

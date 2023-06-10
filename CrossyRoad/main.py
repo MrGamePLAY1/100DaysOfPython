@@ -15,7 +15,10 @@ player = Player()
 # Scoreboard import
 scoreboard = Scoreboard()
 
-# Car import
+# Cars import
+cars = CarManager()
+cars.create_car()
+
 
 # Controls
 screen.onkey(player.move_up, "Up")
@@ -26,8 +29,9 @@ screen.onkey(player.move_right, "Right")
 
 game_is_on = True
 while game_is_on:
+    cars.move()
     time.sleep(0.1)
     screen.update()
 
 
-
+screen.exitonclick()
