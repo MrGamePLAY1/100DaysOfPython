@@ -1,4 +1,5 @@
 import time
+import random
 from turtle import Screen
 from player import Player
 from car_manager import CarManager
@@ -9,16 +10,18 @@ screen.listen()
 screen.setup(width=600, height=600)
 screen.tracer(0)
 
-# Car import
+# Player creation
 player = Player()
 
-# Scoreboard import
+# Car creation
+cars = []
+
+for _ in range(10):
+    car = CarManager()
+    cars.append(car)
+
+# Scoreboard creation
 scoreboard = Scoreboard()
-
-# Cars import
-cars = CarManager()
-cars.create_car()
-
 
 # Controls
 screen.onkey(player.move_up, "Up")
@@ -26,12 +29,11 @@ screen.onkey(player.move_down, "Down")
 screen.onkey(player.move_left, "Left")
 screen.onkey(player.move_right, "Right")
 
-
 game_is_on = True
 while game_is_on:
-    cars.move()
+    for car in cars:
+        car.move()
     time.sleep(0.1)
     screen.update()
-
 
 screen.exitonclick()
