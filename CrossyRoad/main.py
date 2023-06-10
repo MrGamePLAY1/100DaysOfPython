@@ -12,6 +12,11 @@ screen.tracer(0)
 # Car import
 player = Player()
 
+# Scoreboard import
+scoreboard = Scoreboard()
+
+# Car import
+
 # Controls
 screen.onkey(player.move_up, "Up")
 screen.onkey(player.move_down, "Down")
