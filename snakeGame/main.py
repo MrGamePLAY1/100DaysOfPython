@@ -3,13 +3,13 @@ import time
 from snake import Snake
 from food import Food
 from scoreboard import Scoreboard
-# from gameOver import GameOver
+
 
 screen = Screen()
 new_snake = Snake()  # Snake object
 food = Food()  # Food object
 score = Scoreboard()  # Scoreboard object
-# gameOver = GameOver()  # GameOver object
+
 
 screen.listen()
 
