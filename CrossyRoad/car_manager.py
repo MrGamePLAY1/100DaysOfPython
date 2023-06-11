@@ -6,7 +6,6 @@ STARTING_MOVE_DISTANCE = +5
 MOVE_INCREMENT = +10
 
 
-
 class CarManager(Turtle):
 
     def __init__(self):
@@ -30,13 +29,10 @@ class CarManager(Turtle):
             new_car.goto(random.randint(100, 500), random.randint(-250, 250))
             self.all_cars.append(new_car)
 
-
     def car_reset(self):
-        self.goto(300,  random.randint(-250, 250))
+        self.goto(300, random.randint(-250, 250))
         self.showturtle()
-
 
     def move(self):
         for car in self.all_cars:
             car.backward(self.car_speed)
-

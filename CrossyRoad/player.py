@@ -13,7 +13,6 @@ class Player(Turtle):
         self.penup()
         self.goto(STARTING_POSITION)
 
-
     def move_up(self):
         # print(self.ycor())
         self.forward(MOVE_DISTANCE)
@@ -35,4 +34,3 @@ class Player(Turtle):
         self.hideturtle()
         self.goto(STARTING_POSITION)
         self.showturtle()
-
