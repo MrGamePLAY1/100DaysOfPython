@@ -15,6 +15,7 @@ class Player(Turtle):
 
 
     def move_up(self):
+        # print(self.ycor())
         self.forward(MOVE_DISTANCE)
 
     def move_down(self):

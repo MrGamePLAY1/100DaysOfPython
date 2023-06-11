@@ -11,32 +11,32 @@ class CarManager(Turtle):
 
     def __init__(self):
         super().__init__()
+        self.all_cars = []
         self.car_speed = STARTING_MOVE_DISTANCE
+        self.hideturtle()
         self.penup()
-        self.create_car()
 
     def increase_speed(self):
         self.car_speed += MOVE_INCREMENT
         print(self.car_speed)
 
     def create_car(self):
-        self.setheading(180) # car heading
-        self.car_speed = STARTING_MOVE_DISTANCE
-        self.color(random.choice(COLORS))
-        self.shape("square")
-        self.shapesize(stretch_wid=1, stretch_len=2)
-        self.goto(random.randint(100, 500),  random.randint(-230, 250))
-        self.showturtle()
+        random_chance_create_car = random.randint(1, 4)
+        if random_chance_create_car == 2:
+            new_car = Turtle("square")
+            new_car.shapesize(stretch_wid=1, stretch_len=2)
+            new_car.color(random.choice(COLORS))
+            new_car.penup()
+            new_car.goto(random.randint(100, 500), random.randint(-250, 250))
+            self.all_cars.append(new_car)
+
 
     def car_reset(self):
-        self.goto(random.randint(300, 400),  random.randint(-250, 250))
+        self.goto(300,  random.randint(-250, 250))
         self.showturtle()
 
 
     def move(self):
-        new_x = self.xcor() - self.car_speed
-        self.goto(new_x, self.ycor())
-
-
-
+        for car in self.all_cars:
+            car.backward(self.car_speed)
 

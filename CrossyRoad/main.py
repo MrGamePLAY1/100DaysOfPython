@@ -17,12 +17,7 @@ player = Player()
 scoreboard = Scoreboard()
 
 # Car creation
-cars = []
-print(cars)
-
-for _ in range(20):
-    car = CarManager()
-    cars.append(car)
+car_manager = CarManager()
 
 # Controls
 screen.onkey(player.move_up, "Up")
@@ -32,35 +27,36 @@ screen.onkey(player.move_right, "Right")
 
 game_is_on = True
 while game_is_on:
-    for car in cars:
-        time.sleep(0.01)
-        car.move()  # move all cars
+    time.sleep(0.1)
+    car_manager.create_car()  # create new car
+    car_manager.move()  # move all cars
 
-        # Detect collision with car
-        if car.distance(player) < 20:
+    # Detect collision with car
+    for car in car_manager.all_cars:
+        car.distance(player)
+        if car.distance(player) < 25:
             game_is_on = False
             scoreboard.game_over()
-            player.reset()
 
-        # Detect successful crossing
-        if player.ycor() > 280:
-            player.reset()
-            scoreboard.increase_level()
-            car.car_reset()
+    # Detect successful crossing
+    if player.ycor() > 280:
+        player.reset()
+        scoreboard.increase_level()
+        car_manager.increase_speed()
 
-        # --------------------------------------------------------------------
-        # Making sure the player cant go backwards
-        if player.ycor() < -280:
-            print('out of bounds')
-            player.goto(player.xcor(), -280)
+    # --------------------------------------------------------------------
+    # Making sure the player cant go backwards
+    if player.ycor() < -280:
+        print('out of bounds')
+        player.goto(player.xcor(), -280)
 
-        if player.xcor() > 280:
-            print('out of bounds')
-            player.goto(280, player.ycor())
+    if player.xcor() > 280:
+        print('out of bounds')
+        player.goto(280, player.ycor())
 
-        if player.xcor() < -280:
-            print('out of bounds')
-            player.goto(-280, player.ycor())
+    if player.xcor() < -280:
+        print('out of bounds')
+        player.goto(-280, player.ycor())
 
     screen.update()
 
