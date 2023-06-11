@@ -13,6 +13,7 @@ class Player(Turtle):
         self.penup()
         self.goto(0, -280)
 
+
     def move_up(self):
         self.forward(MOVE_DISTANCE)
 
@@ -28,4 +29,9 @@ class Player(Turtle):
         self.goto(right_x, self.ycor())
 
     def reset(self):
-        self.goto(STARTING_POSITION)
+        self.setheading(90)
+        self.penup()
+        self.hideturtle()
+        self.goto(self.xcor(), self.ycor())
+        self.showturtle()
+

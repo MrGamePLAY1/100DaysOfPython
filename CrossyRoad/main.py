@@ -32,8 +32,32 @@ screen.onkey(player.move_right, "Right")
 game_is_on = True
 while game_is_on:
     for car in cars:
+        time.sleep(0.01)
         car.move() # move all cars
-        time.sleep(0.1)
+
+        if car.distance(player) < 20:
+            game_is_on = False
+            scoreboard.game_over()
+            # player.reset()
+
+
+        if player.ycor() > 280:
+            player.reset()
+            car.car_speed += 0.10
+            scoreboard.increase_level()
+
+        # Making sure the player cant go backwards
+        if player.ycor() < -280:
+            print('out of bounds')
+            player.goto(player.xcor(), -280)
+
+        if player.xcor() > 280:
+            print('out of bounds')
+            player.goto(280, player.ycor())
+
+        if player.xcor() < -280:
+            print('out of bounds')
+            player.goto(-280, player.ycor())
 
     screen.update()
 
