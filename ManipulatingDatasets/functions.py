@@ -5,7 +5,17 @@
 #  |_|   \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
 #
 
+import pandas as pd
+
+data = pd.read_csv('data.csv')
+
 
 def get_average_europe(mpg):
     rounded = round(235.215 / mpg, 2)
     return rounded
+
+
+def find_most_powerful_car():
+    most_powerful = data[data.horsepower == data.horsepower.max()]  # printing the most powerful car by displacement
+    most_powerful = most_powerful.iloc[0]  # printing the first row of the most powerful car
+    return most_powerful

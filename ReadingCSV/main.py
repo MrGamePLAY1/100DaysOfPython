@@ -19,8 +19,8 @@ data = pd.read_csv("weather_data.csv")
 data_dict = data.to_dict()
 temp_list = data['temp'].to_list()
 
-average_temp = sum(temp_list)/len(temp_list)
-average = round(average_temp,2)
+average_temp = sum(temp_list) / len(temp_list)
+average = round(average_temp, 2)
 # print(average)
 # print(data_dict)
 
@@ -36,8 +36,8 @@ max_temp = data['temp'].max()
 
 # Creating data frame from scratch
 data_dict = {
-    'students' : ['Amy', 'James', 'Angela'],
-    'scores' : [76, 56, 65]
+    'students': ['Amy', 'James', 'Angela'],
+    'scores': [76, 56, 65]
 }
 
 data_frame = pd.DataFrame(data_dict)
