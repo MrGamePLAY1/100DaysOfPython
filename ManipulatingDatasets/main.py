@@ -33,5 +33,17 @@ print('Average mpg for Japan in KM/100km: ', average_km_japan, 'l\n')
 # ----------------------------------------------------------------------------------
 
 # Finding the most powerful care by horsepower -------------------------------------
-most_powerful_car = find_most_powerful_car()
-print('Most Powerful Car by Horsepower:\n', most_powerful_car)
+most_powerful_car_all = find_most_powerful_car(read_data)
+print('Most Powerful Car by Horsepower:\n', most_powerful_car_all)
+
+europe_cars = read_data.query('origin == "europe"')
+most_powerful_car_europe = find_most_powerful_car(europe_cars)
+print('\nMost Powerful Car by Horsepower for Europe:\n', most_powerful_car_europe)
+
+usa_cars = read_data.query('origin == "usa"')
+most_powerful_car_usa = find_most_powerful_car(usa_cars)
+print('\nMost powerful car by horsepower for USA:\n', most_powerful_car_usa)
+
+jap_cars = read_data.query('origin == "japan"')
+most_powerful_car_jap = find_most_powerful_car(jap_cars)
+print('\nMost powerful car by horsepower for Japan:\n', most_powerful_car_jap)

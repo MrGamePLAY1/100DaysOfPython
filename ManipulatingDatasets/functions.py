@@ -15,7 +15,9 @@ def get_average_europe(mpg):
     return rounded
 
 
-def find_most_powerful_car():
-    most_powerful = data[data.horsepower == data.horsepower.max()]  # printing the most powerful car by displacement
+def find_most_powerful_car(car_data):
+    most_powerful = car_data  # printing the most powerful car by displacement
     most_powerful = most_powerful.iloc[0]  # printing the first row of the most powerful car
     return most_powerful
+
+
