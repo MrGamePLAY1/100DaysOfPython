@@ -20,4 +20,11 @@ def find_most_powerful_car(car_data):
     most_powerful = most_powerful.iloc[0]  # printing the first row of the most powerful car
     return most_powerful
 
-
+# TODO: FIX THIS
+# def find_most_powerful_car_by_mpg():
+#     best_mpg = data.mpg.max()  # printing the most powerful car by mpg
+#     best_hp = data.horsepower.max()  # printing the most powerful car by hp
+#     final = data.iloc[data.mpg == best_mpg and data.horsepower == best_hp]  # printing the most powerful car by mpg
+#     print(final)
+#     return final
+# find_most_powerful_car_by_mpg()
