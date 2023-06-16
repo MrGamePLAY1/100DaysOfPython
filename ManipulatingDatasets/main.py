@@ -50,6 +50,15 @@ print('\nMost powerful car by horsepower for Japan:\n', most_powerful_car_jap)
 
 #  ----------------------------------------------------------------------------------
 
-# Most powerful car by mpg TODO: FIX THIS
-# best_car_all = find_most_powerful_car_by_mpg(read_data)
-# print('\nMost powerful car by mpg:\n', best_car_all)
+# Most powerful car by mpg in all cars ---------------------------------------------
+best_car_all = find_most_powerful_car_by_mpg(read_data)
+print('\nMost powerful car by mpg:\n', best_car_all)
+
+best_car_europe = find_most_powerful_car_by_mpg(europe_cars)
+print('\nMost powerful car by mpg for Europe:\n', best_car_europe)
+
+best_car_usa = find_most_powerful_car_by_mpg(usa_cars)
+print('\nMost powerful car by mpg for USA:\n', best_car_usa)
+
+best_car_jap = find_most_powerful_car_by_mpg(jap_cars)
+print('\nMost powerful car by mpg for Japan:\n', best_car_jap)
