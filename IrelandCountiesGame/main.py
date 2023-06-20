@@ -12,17 +12,25 @@ turtle.shape('ireland.gif')
 read = pd.read_csv('ireland.csv')
 all_counties = read.County.to_list()
 guessed_counties = []
-print(guessed_counties)
-
-answer = screen.textinput(title='Ireland Map', prompt='Name a county!').title()
+# print(guessed_counties)
 score = 0
 
-while answer != 'done':
+while len(guessed_counties) < 33:
+    answer = screen.textinput(title='Ireland Map', prompt='Name a county!').title()
+
+    if answer in guessed_counties:
+        score -= 0
+        print('You already guessed that!')
+        print(guessed_counties)
+
+    if answer == 'Exit':
+        missed_counties = [county for county in all_counties if county not in guessed_counties]
+        generate_csv = pd.DataFrame(missed_counties)
+        generate_csv.to_csv('missed_counties.csv')
+        # print(missed_counties)
+        # print(guessed_counties)
+        break
     if answer in all_counties:
-        if answer in guessed_counties:
-            score -= 1
-            print('You already guessed that!')
-            print(guessed_counties)
         guessed_counties.append(answer)
         score += 1
         screen.title('Ireland Map - Score: ' + str(score) + '/33')
@@ -32,13 +40,15 @@ while answer != 'done':
         county_selected = read[read.County == answer]
         t.goto(int(county_selected.x), int(county_selected.y))
         t.write(answer, font=('Arial', 10, 'normal'))
-        if score == 33:
-            print('You win!')
-            break
-
     else:
         print('incorrect')
-    answer = screen.textinput(title='Ireland Map', prompt='Name a county!')
+        answer = screen.textinput(title='Ireland Map', prompt='Name a county!')
+
+    if score == 33:
+        print('You win!')
+        exit()
+
+
 
 # Getting co-ordinates on click
 # turtle.onscreenclick(get_position_on_click)
