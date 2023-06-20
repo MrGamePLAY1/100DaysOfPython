@@ -28,6 +28,6 @@ Rank,County,Area (km2),Density (/ km²),Traditional Province,x,y
 27,Armagh,"1,327",131.8,Ulster,128.0,125.0
 28,Monaghan,"1,295",47.3,Ulster,86.0,109.0
 29,Longford,"1,091",37.4,Leinster,29.0,40.0
-30,Dublin,922,"1,459.20",Leinster,156.0,-11.0
+30,Dublin,922,"1,459.20",Leinster,156,-11
 31,Carlow,897,63.4,Leinster,141.0,67.0
 32,Louth,826,155.4,Leinster,29.0,40.0
