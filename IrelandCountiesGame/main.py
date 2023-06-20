@@ -11,12 +11,19 @@ turtle.shape('ireland.gif')
 # Reading the CSV
 read = pd.read_csv('ireland.csv')
 all_counties = read.County.to_list()
+guessed_counties = []
+print(guessed_counties)
 
 answer = screen.textinput(title='Ireland Map', prompt='Name a county!')
 score = 0
 
 while answer != 'done':
     if answer in all_counties:
+        if answer in guessed_counties:
+            score -= 1
+            print('You already guessed that!')
+            print(guessed_counties)
+        guessed_counties.append(answer)
         score += 1
         screen.title('Ireland Map - Score: ' + str(score) + '/33')
         t = turtle.Turtle()
