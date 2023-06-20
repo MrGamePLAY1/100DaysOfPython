@@ -14,7 +14,7 @@ all_counties = read.County.to_list()
 guessed_counties = []
 print(guessed_counties)
 
-answer = screen.textinput(title='Ireland Map', prompt='Name a county!')
+answer = screen.textinput(title='Ireland Map', prompt='Name a county!').title()
 score = 0
 
 while answer != 'done':
