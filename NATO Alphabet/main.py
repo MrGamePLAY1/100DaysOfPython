@@ -26,6 +26,7 @@ for (index, row) in student_data_frame.iterrows():
 #TODO 1. Create a dictionary in this format:
 data = {}
 
+# CSV
 csv_data = pd.read_csv("nato_phonetic_alphabet.csv")
 
 
