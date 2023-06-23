@@ -32,19 +32,17 @@ def start_timer():
     if reps % 1 == 0:
         reps += 1
         count_down(work_sec)
+        # @TODO: MAKE THIS WORK WITH MULTIPLE TICKS IN A ROW
         timer_text.config(text='WORK', fg=GREEN)
+        check_text = Label(text='✔ ', fg=GREEN, bg=YELLOW, font=(FONT_NAME, 20))
+        check_text.place()
+        check_text.grid(row=4, column=1)
         if reps % 2 == 0:
             count_down(short_break_sec)
             timer_text.config(text='BREAK', fg=PINK)
             if reps % 8 == 0:
                 count_down(long_break_sec)
                 timer_text.config(text='LONG BREAK', fg=RED)
-
-        # count_down(work_sec)
-        # check_text.config(text='')
-
-    # count_down(5*60)
-    # count_down(work_sec)
 
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
@@ -88,9 +86,7 @@ timer_text = Label(text='Timer', fg=GREEN, bg=YELLOW, font=(FONT_NAME, 40, 'bold
 timer_text.place()
 timer_text.grid(row=1, column=1)
 
-check_text = Label(text='✔', fg=GREEN, bg=YELLOW, font=(FONT_NAME, 20))
-check_text.place()
-check_text.grid(row=4, column=1)
+
 
 window.mainloop()
 # Keep code above here
