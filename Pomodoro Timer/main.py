@@ -12,13 +12,39 @@ SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
 fg = GREEN
 check_mark = '✔'
+reps = 0
 
 
 # ---------------------------- TIMER RESET ------------------------------- #
 
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 def start_timer():
-    count_down(5*60)
+    global reps
+    # work_sec = 5
+    work_sec = WORK_MIN * 60  # 25 minutes
+    # print(work_sec)
+    short_break_sec = SHORT_BREAK_MIN * 60  # 5 minutes
+    # short_break_sec = 4
+    # print(short_break_sec)
+    long_break_sec = LONG_BREAK_MIN * 60  # 20 minutes
+    # print(long_break_sec)
+
+    if reps % 1 == 0:
+        reps += 1
+        count_down(work_sec)
+        timer_text.config(text='WORK', fg=GREEN)
+        if reps % 2 == 0:
+            count_down(short_break_sec)
+            timer_text.config(text='BREAK', fg=PINK)
+            if reps % 8 == 0:
+                count_down(long_break_sec)
+                timer_text.config(text='LONG BREAK', fg=RED)
+
+        # count_down(work_sec)
+        # check_text.config(text='')
+
+    # count_down(5*60)
+    # count_down(work_sec)
 
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
