@@ -1,21 +1,31 @@
 import tkinter as tk
 from tkinter import *
 
+import math
+
 # ---------------------------- CONSTANTS ------------------------------- #
 PINK = "#e2979c"
 RED = "#e7305b"
 GREEN = "#9bdeac"
 YELLOW = "#f7f5dd"
 FONT_NAME = "Courier"
-WORK_MIN = 25
+WORK_MIN = 1
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
 fg = GREEN
 check_mark = '✔'
 reps = 0
+timer = None
 
 
 # ---------------------------- TIMER RESET ------------------------------- #
+def reset_timer():
+    window.after_cancel(timer)
+    canvas.itemconfig(timer_text_inital, text='00:00')
+    timer_text.config(text='Timer', fg=GREEN)
+    check_text.config(text='')
+
+
 
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 def start_timer():
@@ -34,9 +44,6 @@ def start_timer():
         count_down(work_sec)
         # @TODO: MAKE THIS WORK WITH MULTIPLE TICKS IN A ROW
         timer_text.config(text='WORK', fg=GREEN)
-        check_text = Label(text='✔ ', fg=GREEN, bg=YELLOW, font=(FONT_NAME, 20))
-        check_text.place()
-        check_text.grid(row=4, column=1)
         if reps % 2 == 0:
             count_down(short_break_sec)
             timer_text.config(text='BREAK', fg=PINK)
@@ -55,7 +62,15 @@ def count_down(count):
         second = '00'
     canvas.itemconfig(timer_text_inital, text=f'{minute}:{second}')
     if count > 0:
-        window.after(1000, count_down, count - 1)
+        global timer
+        timer = window.after(1000, count_down, count - 1)
+    else:
+        start_timer()
+        mark = ''
+
+        for i in range(math.floor(reps / 2)):
+            mark += check_mark
+        check_text.config(text=mark)
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -77,7 +92,7 @@ start = Button(text='Start', command=start_timer, font=('Arial', 10, 'bold'))
 start.place()
 start.grid(row=3, column=0)
 
-reset = Button(text='Reset', command=start_timer, font=('Arial', 10, 'bold'))
+reset = Button(text='Reset', command=reset_timer, font=('Arial', 10, 'bold'))
 reset.place()
 reset.grid(row=3, column=2)
 
@@ -86,7 +101,10 @@ timer_text = Label(text='Timer', fg=GREEN, bg=YELLOW, font=(FONT_NAME, 40, 'bold
 timer_text.place()
 timer_text.grid(row=1, column=1)
 
-
+timer_text.config(text='WORK', fg=GREEN)
+check_text = Label(fg=GREEN, bg=YELLOW, font=(FONT_NAME, 20))
+check_text.place()
+check_text.grid(row=4, column=1)
 
 window.mainloop()
 # Keep code above here
