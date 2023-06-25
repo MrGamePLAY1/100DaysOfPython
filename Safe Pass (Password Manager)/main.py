@@ -1,13 +1,24 @@
 from tkinter import *
 
+
 # ------------------- Password Generator ------------------- #
 def generate_password():
     pass
 
+
 # ------------------- Saving Password  --------------------- #
 # Take all the entrys put in and save them in a file
 def save_password():
-    pass
+    file = open("passwords.txt", "w")
+    website_contents = website_entry.get()
+    email_contents = email_entry.get()
+    password_contents = password_entry.get()
+    final = f"{website_contents} | {email_contents} | {password_contents}"
+
+
+    # Write
+    file.write(final)
+    file.close()
 
 
 # ------------------- UI ----------------------------------- #
@@ -48,7 +59,7 @@ password_entry.grid(row=3, column=1, pady=5)
 generate_pass = Button(window, text="Generate Password", command=generate_password)
 generate_pass.grid(row=3, column=2, pady=5, padx=12, sticky=W)
 
-add_button = Button(text="Add", width=36)
+add_button = Button(text="Add", width=36, command=save_password)
 add_button.grid(row=4, column=1, columnspan=2, pady=5)
 
 window.mainloop()
