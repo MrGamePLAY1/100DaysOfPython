@@ -1,6 +1,7 @@
 import random
 from tkinter import *
 from random import randint
+from tkinter import messagebox
 
 
 # ------------------- Password Generator ------------------- #
@@ -17,19 +18,27 @@ def save_password():
     not_saved = True
 
     while not_saved:
-        file = open("passwords.txt", "w")
-        website_contents = website_entry.get()
-        email_contents = email_entry.get()
-        password_contents = password_entry.get()
-        final = f"{website_contents} | {email_contents} | {password_contents}\n"
+        if website_entry.get() == "" or email_entry.get() == "" or password_entry.get() == "":
+            validations()
+            break
+        else:
+            # Read current passwords in file
+            file = open("passwords.txt", "r")
+            file_contents = file.read()
+            # Append to the file with new passwords
+            file = open("passwords.txt", "a")
+            website_contents = website_entry.get()
+            email_contents = email_entry.get()
+            password_contents = password_entry.get()
+            final = f"{website_contents} | {email_contents} | {password_contents}\n"
 
-        # Write
-        file.write(final)
-        file.close()
-        success_label = Label(window, text="Success!", fg="green")
-        success_label.grid(row=4, column=0)
-        window.after(2000, remove_label, success_label)
-        not_saved = False
+            # Write
+            file.write(final)
+            file.close()
+            success_label = Label(window, text="Success!", fg="green")
+            success_label.grid(row=4, column=0)
+            window.after(2000, remove_label, success_label)
+            not_saved = False
 
     # Clearing all the feeds
     website_entry.delete(0, END)
@@ -39,8 +48,15 @@ def save_password():
     website_entry.focus()
 
 
+def validations():
+    if website_entry.get() == "" or email_entry.get() == "" or password_entry.get() == "":
+        messagebox.showwarning("Warning", "You have empty fields!")
+
+
 def remove_label(success_label):
     success_label.destroy()
+
+
 
 
 # ------------------- UI ----------------------------------- #
