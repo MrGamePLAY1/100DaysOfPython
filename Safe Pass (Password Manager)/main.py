@@ -1,9 +1,18 @@
+import random
 from tkinter import *
+
+from random import randint
 
 
 # ------------------- Password Generator ------------------- #
 def generate_password():
-    pass
+    characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+1234567890"
+    final_password = random.sample(characters, randint(12, 16))
+    # print(final_passord)
+    password_entry.insert(0, "".join(final_password))
+
+    # Writing new password to text file
+    save_password()
 
 
 # ------------------- Saving Password  --------------------- #
@@ -14,7 +23,6 @@ def save_password():
     email_contents = email_entry.get()
     password_contents = password_entry.get()
     final = f"{website_contents} | {email_contents} | {password_contents}"
-
 
     # Write
     file.write(final)
