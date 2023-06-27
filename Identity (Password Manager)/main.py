@@ -1,6 +1,5 @@
 import random
 from tkinter import *
-
 from random import randint
 
 
@@ -8,25 +7,40 @@ from random import randint
 def generate_password():
     characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+1234567890"
     final_password = random.sample(characters, randint(12, 16))
-    # print(final_passord)
-    password_entry.insert(0, "".join(final_password))
 
-    # Writing new password to text file
-    save_password()
+    password_entry.insert(0, "".join(final_password))
 
 
 # ------------------- Saving Password  --------------------- #
 # Take all the entrys put in and save them in a file
 def save_password():
-    file = open("passwords.txt", "w")
-    website_contents = website_entry.get()
-    email_contents = email_entry.get()
-    password_contents = password_entry.get()
-    final = f"{website_contents} | {email_contents} | {password_contents}"
+    not_saved = True
 
-    # Write
-    file.write(final)
-    file.close()
+    while not_saved:
+        file = open("passwords.txt", "w")
+        website_contents = website_entry.get()
+        email_contents = email_entry.get()
+        password_contents = password_entry.get()
+        final = f"{website_contents} | {email_contents} | {password_contents}\n"
+
+        # Write
+        file.write(final)
+        file.close()
+        success_label = Label(window, text="Success!", fg="green")
+        success_label.grid(row=4, column=0)
+        window.after(2000, remove_label, success_label)
+        not_saved = False
+
+    # Clearing all the feeds
+    website_entry.delete(0, END)
+    email_entry.delete(0, END)
+    password_entry.delete(0, END)
+
+    website_entry.focus()
+
+
+def remove_label(success_label):
+    success_label.destroy()
 
 
 # ------------------- UI ----------------------------------- #
