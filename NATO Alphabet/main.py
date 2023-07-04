@@ -30,12 +30,18 @@ csv_data = pd.read_csv("nato_phonetic_alphabet.csv")
 phonetic_dic = {row.letter: row.code for (index, row) in csv_data.iterrows()}
 # print(phonetic_dic)
 
-input_value = input("Enter a word: ").upper()
 
-# try, except
-try:
-    output_list = [phonetic_dic[letter] for letter in input_value]
-except KeyError:
-    print('Sorry only letters in the alphabet please')
-finally:
-    print(output_list)
+def generate_phoenetic():
+    global output_list
+    input_value = input("Enter a word: ").upper()
+
+    # try, except
+    try:
+        output_list = [phonetic_dic[letter] for letter in input_value]
+    except KeyError:
+        print('Sorry only letters in the alphabet please')
+        generate_phoenetic()
+    finally:
+        print(output_list)
+
+generate_phoenetic()
