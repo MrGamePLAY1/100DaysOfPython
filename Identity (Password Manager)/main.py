@@ -2,6 +2,7 @@ import random
 from tkinter import *
 from random import randint
 from tkinter import messagebox
+import json
 
 
 # ------------------- Password Generator ------------------- #
@@ -10,6 +11,7 @@ def generate_password():
     final_password = random.sample(characters, randint(12, 16))
 
     password_entry.insert(0, "".join(final_password))
+    read_for_passwords()
 
 
 # ------------------- Saving Password  --------------------- #
@@ -23,22 +25,26 @@ def save_password():
             break
         else:
             # Read current passwords in file
-            file = open("passwords.txt", "r")
-            file_contents = file.read()
-            # Append to the file with new passwords
-            file = open("passwords.txt", "a")
-            website_contents = website_entry.get()
-            email_contents = email_entry.get()
-            password_contents = password_entry.get()
-            final = f"{website_contents} | {email_contents} | {password_contents}\n"
+            with open('passwords.json', 'w') as data_file:
 
-            # Write
-            file.write(final)
-            file.close()
-            success_label = Label(window, text="Success!", fg="green")
-            success_label.grid(row=4, column=0)
-            window.after(2000, remove_label, success_label)
-            not_saved = False
+                # Getting elements
+                website_contents = website_entry.get()
+                email_contents = email_entry.get()
+                password_contents = password_entry.get()
+
+                new_data = {
+                    website_contents: {
+                        'email': email_contents,
+                        'password': password_contents,
+                    }
+                }
+
+                json.dump(new_data, data_file, indent=4)
+
+                success_label = Label(window, text="Success!", fg="green")
+                success_label.grid(row=4, column=0)
+                window.after(2000, remove_label, success_label)
+                not_saved = False
 
     # Clearing all the feeds
     website_entry.delete(0, END)
@@ -57,6 +63,10 @@ def remove_label(success_label):
     success_label.destroy()
 
 
+def read_for_passwords():
+    with open('passwords.json', 'r') as data_file:
+        data_file = json.load(data_file)
+        print(data_file)
 
 
 # ------------------- UI ----------------------------------- #
