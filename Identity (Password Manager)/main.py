@@ -11,7 +11,7 @@ def generate_password():
     final_password = random.sample(characters, randint(12, 16))
 
     password_entry.insert(0, "".join(final_password))
-    read_for_passwords()
+    # read_for_passwords()
 
 
 # ------------------- Saving Password  --------------------- #
@@ -19,18 +19,18 @@ def generate_password():
 def save_password():
     not_saved = True
 
+    # Getting elements
+    website_contents = website_entry.get()
+    email_contents = email_entry.get()
+    password_contents = password_entry.get()
+
     while not_saved:
         if website_entry.get() == "" or email_entry.get() == "" or password_entry.get() == "":
             validations()
             break
         else:
             # Read current passwords in file
-            with open('passwords.json', 'w') as data_file:
-
-                # Getting elements
-                website_contents = website_entry.get()
-                email_contents = email_entry.get()
-                password_contents = password_entry.get()
+            with open('passwords.json', 'r') as data_file:
 
                 new_data = {
                     website_contents: {
@@ -39,7 +39,13 @@ def save_password():
                     }
                 }
 
-                json.dump(new_data, data_file, indent=4)
+                # Load data
+                data = json.load(data_file)
+                data.update(new_data)
+
+            with open('passwords.json', 'w') as data_file:
+                json.dump(data, data_file, indent=4)
+
 
                 success_label = Label(window, text="Success!", fg="green")
                 success_label.grid(row=4, column=0)
@@ -66,7 +72,8 @@ def remove_label(success_label):
 def read_for_passwords():
     with open('passwords.json', 'r') as data_file:
         data_file = json.load(data_file)
-        print(data_file)
+        return data_file
+        # print(data_file)
 
 
 # ------------------- UI ----------------------------------- #

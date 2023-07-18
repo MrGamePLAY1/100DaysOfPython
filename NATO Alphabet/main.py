@@ -28,7 +28,6 @@ data = {}
 csv_data = pd.read_csv("nato_phonetic_alphabet.csv")
 
 phonetic_dic = {row.letter: row.code for (index, row) in csv_data.iterrows()}
-# print(phonetic_dic)
 
 
 def generate_phoenetic():
@@ -43,5 +42,6 @@ def generate_phoenetic():
         generate_phoenetic()
     finally:
         print(output_list)
+
 
 generate_phoenetic()
