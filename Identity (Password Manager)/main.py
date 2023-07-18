@@ -29,35 +29,44 @@ def save_password():
             validations()
             break
         else:
-            # Read current passwords in file
-            with open('passwords.json', 'r') as data_file:
 
-                new_data = {
-                    website_contents: {
-                        'email': email_contents,
-                        'password': password_contents,
-                    }
+            new_data = {
+                website_contents: {
+                    'email': email_contents,
+                    'password': password_contents,
                 }
+            }
 
-                # Load data
-                data = json.load(data_file)
+            # try, except
+            try:
+                with open('passwords.json', 'r') as data_file:
+                    # Read Data
+                    data = json.load(data_file)
+
+            except FileNotFoundError:
+                print('Sorry no file found, creating one now')
+                with open('passwords.json', 'w') as data_file:
+                    json.dump(new_data, data_file, indent=4)
+            else:
                 data.update(new_data)
+                with open('passwords.json', 'w') as data_file:
+                    json.dump(new_data, data_file, indent=4)
+                    success_label = Label(window, text="Success!", fg="green")
+                    success_label.grid(row=4, column=0)
+                    window.after(2000, remove_label, success_label)
+                    not_saved = False
 
-            with open('passwords.json', 'w') as data_file:
-                json.dump(data, data_file, indent=4)
+            finally:
+                # Clearing all the feeds
+                website_entry.delete(0, END)
+                email_entry.delete(0, END)
+                password_entry.delete(0, END)
 
 
-                success_label = Label(window, text="Success!", fg="green")
-                success_label.grid(row=4, column=0)
-                window.after(2000, remove_label, success_label)
-                not_saved = False
 
-    # Clearing all the feeds
-    website_entry.delete(0, END)
-    email_entry.delete(0, END)
-    password_entry.delete(0, END)
 
     website_entry.focus()
+
 
 
 def validations():
