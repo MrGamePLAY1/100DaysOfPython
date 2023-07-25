@@ -94,7 +94,10 @@ def search_passwords():
         for website_name, website_data in data.items():
             if website_contents == website_name.lower():
                 print('Data', website_data)
-                messagebox.showinfo("Message", website_data['email']['password'])
+                email = website_data.get('email')
+                password = website_data.get('password')
+                message = f"We Found This:\n\nEmail: {email} \nPassword: {password}"
+                messagebox.showinfo("Message", message)
 
             # print(f"Website Name: {website_name}")
             # print("Website Data:")
