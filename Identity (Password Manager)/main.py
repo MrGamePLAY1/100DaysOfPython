@@ -82,29 +82,39 @@ def read_for_passwords():
 
 
 def search_passwords():
+    global found_match
     # Get the elements in the website
     website_contents = website_entry.get()
     website_contents = website_contents.lower()
-
     # Once we read the website entry use it as a key to search the data
     with open('passwords.json', 'r') as data_file:
         data = json.load(data_file)
 
-        # Iterate through the keys in the data dictionary
-        for website_name, website_data in data.items():
-            if website_contents == website_name.lower():
-                print('Data', website_data)
-                email = website_data.get('email')
-                password = website_data.get('password')
-                message = f"We Found This:\n\nEmail: {email} \nPassword: {password}"
-                messagebox.showinfo("Message", message)
+    # Iterate through the keys in the data dictionary
+    for website_name, website_data in data.items():
+        if website_contents == website_name.lower():
+            print('Data', website_data)
+            email = website_data.get('email')
+            password = website_data.get('password')
 
-            # print(f"Website Name: {website_name}")
-            # print("Website Data:")
-            # print(website_data)
-            # print()
+            message = f"We Found This:\n\nEmail: {email} \nPassword: {password}"
+            messagebox.showinfo("Message", message)
+
+            # Set the flag to True since we found a match
+            found_match = True
+
+            break # Break out of the loop
+
+        else:
+            found_match = False
+            messagebox.showerror('Message', f'No website found called {website_contents}')
+            break
 
 
+        # print(f"Website Name: {website_name}")
+        # print("Website Data:")
+        # print(website_data)
+        # print()
 
 
 # ------------------- UI ----------------------------------- #
