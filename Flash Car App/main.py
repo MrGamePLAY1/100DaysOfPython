@@ -16,8 +16,8 @@ def random_word():
 
 
 def french_to_english():
-    canvas.itemcget(card_title, text='English')
-    canvas.itemcget(card_word, text=current_word['English'])
+    canvas.itemconfig(card_title, text='English')
+    canvas.itemconfig(card_word, text=current_word['English'])
 
 # french_to_english()
 
