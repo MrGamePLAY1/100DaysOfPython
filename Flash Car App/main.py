@@ -16,8 +16,13 @@ def random_word():
 
 
 def french_to_english():
+    canvas.create_image(400, 263, image=card_back_image)
     canvas.itemconfig(card_title, text='English')
     canvas.itemconfig(card_word, text=current_word['English'])
+    canvas.itemconfig(background, image=card_back_image)
+
+
+
 
 # french_to_english()
 
@@ -26,11 +31,16 @@ BACKGROUND_COLOR = "#B1DDC6"
 window = Tk()
 window.title('Flash')
 window.config(padx=50, pady=50, background=BACKGROUND_COLOR)
-window.after(3000, func=french_to_english)
+
 
 canvas = Canvas(width=800, height=526)
+
+# Front and background images
 card_front_image = PhotoImage(file='images/card_front.png')
-canvas.create_image(400, 263, image=card_front_image)
+card_back_image = PhotoImage(file='images/card_back.png')
+
+background = canvas.create_image(400, 263, image=card_front_image)
+window.after(3000, func=french_to_english)
 
 # Text
 card_title = canvas.create_text(400, 150, text='', font=('Ariel', 30, 'italic'))
