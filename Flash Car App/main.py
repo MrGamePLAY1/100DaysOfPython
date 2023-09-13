@@ -9,7 +9,6 @@ to_learn = data.to_dict(orient='records')
 
 def random_word():
     global current_word
-    french = data['French'].to_list()
     current_word = random.choice(to_learn)
     canvas.itemconfig(card_title, text='French')
     canvas.itemconfig(card_word, text=current_word['French'])
@@ -22,8 +21,6 @@ def french_to_english():
     canvas.itemconfig(background, image=card_back_image)
 
 
-
-
 # french_to_english()
 
 BACKGROUND_COLOR = "#B1DDC6"
@@ -31,7 +28,6 @@ BACKGROUND_COLOR = "#B1DDC6"
 window = Tk()
 window.title('Flash')
 window.config(padx=50, pady=50, background=BACKGROUND_COLOR)
-
 
 canvas = Canvas(width=800, height=526)
 
@@ -56,7 +52,6 @@ unknown_button.grid(row=1, column=0)
 check_image = PhotoImage(file='images/right.png')
 correct_button = Button(image=check_image, highlightthickness=0, command=random_word)
 correct_button.grid(row=1, column=1)
-
 
 # Start displaying the new French word
 random_word()
