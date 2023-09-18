@@ -15,10 +15,10 @@ def random_word():
 
 
 def french_to_english():
-    canvas.create_image(400, 263, image=card_back_image)
     canvas.itemconfig(card_title, text='English')
     canvas.itemconfig(card_word, text=current_word['English'])
     canvas.itemconfig(background, image=card_back_image)
+    canvas.create_image(400, 263, image=card_back_image)
 
 
 # french_to_english()
