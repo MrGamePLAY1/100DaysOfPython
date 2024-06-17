@@ -18,7 +18,10 @@ def french_to_english():
     canvas.itemconfig(card_title, text='English')
     canvas.itemconfig(card_word, text=current_word['English'])
     canvas.itemconfig(background, image=card_back_image)
-    #canvas.create_image(400, 263, image=card_back_image)
+
+def reset_after_chocie():
+    window.after(3000, func=french_to_english)
+
 
 
 # french_to_english()
