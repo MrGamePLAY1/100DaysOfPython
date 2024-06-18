@@ -8,19 +8,19 @@ to_learn = data.to_dict(orient='records')
 
 
 def random_word():
-    global current_word
+    global current_word, flip_timer
+    window.after_cancel(flip_timer)
     current_word = random.choice(to_learn)
-    canvas.itemconfig(card_title, text='French')
-    canvas.itemconfig(card_word, text=current_word['French'])
+    canvas.itemconfig(background, image=card_front_image)
+    canvas.itemconfig(card_title, text='French', fill='black')
+    canvas.itemconfig(card_word, text=current_word['French'], fill='black')
+    flip_timer = window.after(3000, func=french_to_english)
 
 
 def french_to_english():
-    canvas.itemconfig(card_title, text='English')
-    canvas.itemconfig(card_word, text=current_word['English'])
+    canvas.itemconfig(card_title, text='English', fill='white')
+    canvas.itemconfig(card_word, text=current_word['English'], fill='white')
     canvas.itemconfig(background, image=card_back_image)
-
-def reset_after_chocie():
-    window.after(3000, func=french_to_english)
 
 
 
@@ -39,7 +39,7 @@ card_front_image = PhotoImage(file='images/card_front.png')
 card_back_image = PhotoImage(file='images/card_back.png')
 
 background = canvas.create_image(400, 263, image=card_front_image)
-window.after(3000, func=french_to_english)
+flip_timer = window.after(3000, func=french_to_english)
 
 # Text
 card_title = canvas.create_text(400, 150, text='', fill='#000000', font=('Ariel', 30, 'italic'))
